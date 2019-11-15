@@ -8,8 +8,8 @@
 
 # Requirements
 
-windows
-setup python environment
+windows  
+setup python environment  
 
 * install anaconda 
 * conda create 
@@ -19,17 +19,17 @@ setup python environment
 
 # Train model 
 
-checkout https://github.com/tensorflow/models.git
-copy 
-export_model.py
-exporter.py (overwrite)
-to research\object_detection
+checkout https://github.com/tensorflow/models.git  
+copy  
+export_model.py  
+exporter.py (overwrite)  
+to research\object_detection  
 
-download ssd_mobilenet_v1_coco_2018_01_28.tar.gz extract to research\object_detection\ssd_mobilenet_v1_coco_2018_01_28
-edit ssd_mobilenet_v1_coco_2018_01_28\pipeline.config 
-see pipeline.config for example 
+download ssd_mobilenet_v1_coco_2018_01_28.tar.gz extract to research\object_detection\ssd_mobilenet_v1_coco_2018_01_28  
+edit ssd_mobilenet_v1_coco_2018_01_28\pipeline.config  
+see pipeline.config for example  
 
-generate protos 
+generate protos  
 
 ```
 cd research\object_detection
@@ -56,7 +56,7 @@ python export_model.py
 
 ```
 
-Check model 
+Check model  
 
 ```
 >saved_model_cli show --dir object_detection/1/saved_model --all
@@ -115,8 +115,8 @@ signature_def['serving_default']:
 
 # Running tensorflow serving
 
-Install docker 
-Copy saved_model to location where it is reachable by docker 
+Install docker  
+Copy saved_model to location where it is reachable by docker   
 
 ```
 TESTDATA="/home/docker/users/tensorflow-serving/tensorflow_serving/servables/tensorflow/testdata"
@@ -139,7 +139,49 @@ docker run -t --name tensorflow_serving --rm -p 8500:8500 -p 8501:8501 \
 
 # Create client 
 
+The grpc client depends on tensorflow api.  
+To build tensorflow api checkout https://github.com/tensorflow/tensorflow.git
+checkout https://github.com/tensorflow/serving.git  
+cp tensorflow_serving to tensorflow   
+
+```
+tf
+├── models
+│   ├── official
+│   ├── research
+│   ├── samples
+│   └── tutorials
+├── serving
+│   ├── tensorflow_serving
+│   ├── third_party
+│   └── tools
+├── tensorflow
+│   ├── tensorflow
+│   ├── tensorflow_serving
+│   ├── third_party
+│   └── tools
+```
+
+Run protoc  
+
+```
+cd tf\tensorflow
+for /f %i in ('dir /b tensorflow_serving\apis\*.proto') do protoc --python_out=. tensorflow_serving\apis\%i
+```
+If the above does not work you can copy the sample ones at tf\serving\tensorflow_serving\apis  
+
 
 # Execute client 
 
+Use the python environment 
+conda activate tensorflow1 
+copy the image you want to classify to tensorflow_serving for example clock.jpg 
+Edit object_detection_client.py  
+make sure model name, signature name matches results from saved_model_cli  
+
+```
+python object_detection_client.py 
+```
+
+check the generated result.jpg 
 
