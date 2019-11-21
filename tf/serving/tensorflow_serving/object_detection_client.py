@@ -17,7 +17,7 @@ import inspect
 
 tf.app.flags.DEFINE_string('server', '192.168.99.100:8500', 'PredictionService host:port')
 tf.app.flags.DEFINE_string('input_image', 'clock.jpg', 'Input Image clock.jpeg')
-tf.app.flags.DEFINE_string('path_to_labels', 'D:/ming/git/tensorflow/models/research/object_detection/data/mscoco_complete_label_map.pbtxt', 'path to labels pbtxt')
+tf.app.flags.DEFINE_string('path_to_labels', 'D:/tf/models/research/object_detection/data/mscoco_complete_label_map.pbtxt', 'path to labels pbtxt')
 
 FLAGS = tf.app.flags.FLAGS
 

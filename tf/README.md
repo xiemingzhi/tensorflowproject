@@ -180,6 +180,8 @@ Edit object_detection_client.py
 make sure model name, signature name matches results from saved_model_cli  
 
 ```
+cd tf\serving\tensorflow_serving
+set PYTHONPATH=d:\tf\models;d:\tf\models\research;d:\tf\models\research\slim;d:\tf\serving  
 python object_detection_client.py 
 ```
 
