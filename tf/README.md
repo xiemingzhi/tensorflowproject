@@ -43,6 +43,7 @@ Edit export_model.py set the paths
 
 ```
 cd research\object_detection
+set PYTHONPATH=d:\tf\models;d:\tf\models\research;d:\tf\models\research\slim;d:\tf\serving  
 python export_model.py
 ...
 ...
