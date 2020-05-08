@@ -2,3 +2,4 @@
 *.tar
 /tf/models/research/object_detection/pretrained_model/
 /tf/models/research/object_detection/export_model/
+.vscode/settings.json
